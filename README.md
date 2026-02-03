@@ -48,7 +48,7 @@ python New_Salary_gui.py
 
 ## 📷 Screenshot
 
-<img width="1853" height="650" alt="salary_prediction_gui_screenshot" src="https://github.com/user-attachments/assets/d1581089-665f-4742-bd47-229558209f97" />
+<img width="1908" height="1002" alt="Image" src="https://github.com/user-attachments/assets/e4e2d808-a2d0-4e0f-92c4-d033f68b6b2e" />
 
 ---
 
