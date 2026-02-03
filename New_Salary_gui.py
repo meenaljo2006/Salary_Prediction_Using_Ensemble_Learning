@@ -30,25 +30,39 @@ def predict_salary(age, gender, edu, job, exp):
                             columns=['Age', 'Gender', 'Education Level', 'Job Title', 'Years of Experience'])
     scaled_input = scaler.transform(input_df)
     salary = model.predict(scaled_input)[0]
-    return f"💰 Predicted Monthly Salary: ₹{salary:,.2f}"
+    result_text = f"💰 Predicted Monthly Salary: ₹{salary:,.2f}"
+        
+    return gr.Textbox(value=result_text, visible=True)
+
+custom_css = """
+footer {
+    display: none !important;
+}
+.narrow-layout {
+    max-width: 400px !important;
+    margin: 0 auto !important;
+}
+"""
 
 # Interface
-with gr.Blocks() as interface:
+with gr.Blocks(css=custom_css) as interface:
     gr.HTML("""
     <h1 style='text-align:center; font-size:32px; margin-bottom:0;'>💼 Salary Predictor</h1>
     <p style='text-align:center; font-size:20px; margin-top:4px;'>Enter your details to get a predicted monthly salary</p>
 """)
 
 
-    with gr.Row():
+    with gr.Column(elem_classes=["narrow-layout"]):
         age = gr.Number(label="Age")
         gender = gr.Dropdown(gender_options, label="Gender")
         edu = gr.Dropdown(education_options, label="Education Level")
         job = gr.Dropdown(job_title_options, label="Job Title")
         exp = gr.Number(label="Years of Experience")
 
-    output = gr.Textbox(label="Prediction Result", show_copy_button=True)
-    submit_btn = gr.Button("Predict")
+    
+        submit_btn = gr.Button("Predict")
+
+        output = gr.Textbox(label="Prediction Result",visible=False)
 
     # Attach function
     submit_btn.click(fn=predict_salary, inputs=[age, gender, edu, job, exp], outputs=output)
